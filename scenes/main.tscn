@@ -12,9 +12,6 @@ size = Vector2(128, 128)
 
 [node name="Main" type="Node2D"]
 
-[node name="MainCharacter" parent="." instance=ExtResource("3_llikw")]
-position = Vector2(0, -72)
-
 [node name="Wall3" type="StaticBody2D" parent="." groups=["wall"]]
 position = Vector2(0, 96)
 scale = Vector2(2, 0.600001)
@@ -54,3 +51,9 @@ position = Vector2(288, -56)
 
 [node name="Target" parent="." instance=ExtResource("4_pw3em")]
 position = Vector2(704, 128)
+
+[node name="MainCharacter" parent="." instance=ExtResource("3_llikw")]
+position = Vector2(21, -51)
+
+[node name="FiringPoint" type="Marker2D" parent="."]
+position = Vector2(85, -117)

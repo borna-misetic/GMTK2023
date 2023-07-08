@@ -16,7 +16,9 @@ func _input(event):
 	if Input.is_action_just_pressed("shoot") and !is_fired and !$SwapMenu.visible and active_bullet != "" and bullets_left[active_index] > 0:
 		is_fired = true
 		var bullet = bullet_path.instantiate()
-		bullet.position = $".".position
+		bullet.position = $FiringPoint.position
+		$AnimationPlayer.play("shoot")
+		await get_tree().create_timer(0.7).timeout
 		get_parent().add_child(bullet)
 		$Camera2D.enabled = false
 		bullet.connect("destroyed", Callable(self, "on_destroyed"))
@@ -35,7 +37,9 @@ func _input(event):
 			0: $SwapMenu/RedCount.text = str(bullets_left[active_index])
 			1: $SwapMenu/BlueCount.text = str(bullets_left[active_index])
 			2: $SwapMenu/SilverCount.text = str(bullets_left[active_index])
-		
+		await $AnimationPlayer.animation_finished
+		$AnimationPlayer.play("idle")
+
 	if Input.is_action_pressed("swap") and !is_fired:
 		$SwapMenu.visible = true
 	else:
