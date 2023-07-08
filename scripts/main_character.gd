@@ -16,8 +16,8 @@ func _input(event):
 	if Input.is_action_just_pressed("shoot") and !is_fired and !$SwapMenu.visible and active_bullet != "" and bullets_left[active_index] > 0:
 		is_fired = true
 		var bullet = bullet_path.instantiate()
+		bullet.position = $".".position
 		get_parent().add_child(bullet)
-		bullet.position = $FirePosition.position
 		$Camera2D.enabled = false
 		bullet.connect("destroyed", Callable(self, "on_destroyed"))
 		match(active_bullet):

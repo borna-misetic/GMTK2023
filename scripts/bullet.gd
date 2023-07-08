@@ -11,6 +11,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	print(position)
 	var mouse_pos = get_global_mouse_position()
 	if(!is_in_deadzone):
 		var direction = (mouse_pos - position).normalized()

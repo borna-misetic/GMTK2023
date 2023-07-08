@@ -8,6 +8,7 @@ size = Vector2(64, 64)
 
 [node name="Breaker" type="StaticBody2D" groups=["breaker"]]
 script = ExtResource("1_1gl73")
+time = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_t02go")
@@ -18,6 +19,6 @@ wait_time = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3rqso")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ShutdownSound" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="BreakerTimer" to="." method="_on_breaker_timer_timeout"]
