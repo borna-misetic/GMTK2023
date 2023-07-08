@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi0psdp6rlyuq"]
+
+[ext_resource type="Script" path="res://scripts/main_character.gd" id="1_aafk3"]
+[ext_resource type="Texture2D" uid="uid://iwvq2gt8uh32" path="res://assets/img/icon.svg" id="1_kvdpl"]
+
+[node name="MainCharacter" type="StaticBody2D"]
+script = ExtResource("1_aafk3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 2)
+texture = ExtResource("1_kvdpl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="FirePosition" type="Marker2D" parent="."]
+position = Vector2(128, 0)
+
+[node name="SwapMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -448.0
+offset_top = -104.0
+offset_right = -160.0
+offset_bottom = 96.0
+
+[node name="ColorRect" type="ColorRect" parent="SwapMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.576471)
+
+[node name="RedButton" type="Button" parent="SwapMenu"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 47.0
+text = "RED"
+
+[node name="BlueButton" type="Button" parent="SwapMenu"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 208.0
+offset_bottom = 111.0
+text = "BLUE"
+
+[node name="SilverButton" type="Button" parent="SwapMenu"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 144.0
+offset_right = 208.0
+offset_bottom = 175.0
+text = "SILVER"
+
+[node name="RedCount" type="Label" parent="SwapMenu"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 16.0
+offset_right = 242.0
+offset_bottom = 42.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BlueCount" type="Label" parent="SwapMenu"]
+offset_left = 232.0
+offset_top = 80.0
+offset_right = 242.0
+offset_bottom = 106.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SilverCount" type="Label" parent="SwapMenu"]
+offset_left = 232.0
+offset_top = 144.0
+offset_right = 242.0
+offset_bottom = 170.0
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="SwapMenu/RedButton" to="." method="_on_red_button_pressed"]
+[connection signal="pressed" from="SwapMenu/BlueButton" to="." method="_on_blue_button_pressed"]
+[connection signal="pressed" from="SwapMenu/SilverButton" to="." method="_on_silver_button_pressed"]

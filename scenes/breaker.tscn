@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://7ls8o2oqkeb"]
+
+[ext_resource type="Script" path="res://scripts/breaker.gd" id="1_1gl73"]
+[ext_resource type="Texture2D" uid="uid://c12unqbbunsqs" path="res://assets/img/breaker-temp.png" id="1_t02go"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rqso"]
+size = Vector2(64, 64)
+
+[node name="Breaker" type="StaticBody2D" groups=["breaker"]]
+script = ExtResource("1_1gl73")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t02go")
+
+[node name="BreakerTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3rqso")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="timeout" from="BreakerTimer" to="." method="_on_breaker_timer_timeout"]

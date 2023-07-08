@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyilyr555kuok"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_k64x0"]
+[ext_resource type="Texture2D" uid="uid://bpa2inv6b6u2r" path="res://assets/img/red-temp.png" id="2_g3awl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0huls"]
+size = Vector2(56, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ucgn2"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6y42g"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_k64x0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_g3awl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0huls")
+disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_speed = 32.0
+
+[node name="MouseDeadzone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDeadzone"]
+shape = SubResource("CircleShape2D_ucgn2")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_6y42g")
+
+[connection signal="mouse_entered" from="MouseDeadzone" to="." method="_on_mouse_deadzone_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDeadzone" to="." method="_on_mouse_deadzone_mouse_exited"]
+[connection signal="body_entered" from="CollisionArea" to="." method="_on_collision_area_body_entered"]

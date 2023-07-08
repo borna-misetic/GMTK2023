@@ -1,13 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://c26c17rmw2e1m"]
+[gd_scene load_steps=7 format=3 uid="uid://c26c17rmw2e1m"]
 
 [ext_resource type="Texture2D" uid="uid://iwvq2gt8uh32" path="res://assets/img/icon.svg" id="2_5ii8y"]
-[ext_resource type="PackedScene" uid="uid://ckvufig4jyfnu" path="res://scenes/vent.tscn" id="3_6d4w2"]
 [ext_resource type="PackedScene" uid="uid://7ls8o2oqkeb" path="res://scenes/breaker.tscn" id="3_adfh8"]
 [ext_resource type="PackedScene" uid="uid://bi0psdp6rlyuq" path="res://scenes/main_character.tscn" id="3_llikw"]
-[ext_resource type="PackedScene" uid="uid://4ian2vyskwto" path="res://scenes/electricity.tscn" id="4_hu5s6"]
-[ext_resource type="PackedScene" uid="uid://fjb1b3ky65ln" path="res://scenes/target.tscn" id="4_pw3em"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aun7h"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbbff"]
+size = Vector2(128, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abqb2"]
 size = Vector2(128, 128)
 
 [node name="Main" type="Node2D"]
@@ -43,14 +46,27 @@ texture = ExtResource("2_5ii8y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
 shape = SubResource("RectangleShape2D_aun7h")
 
-[node name="Vent" parent="." instance=ExtResource("3_6d4w2")]
+[node name="Vent" type="StaticBody2D" parent="." groups=["vent"]]
 position = Vector2(640, 232)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Vent"]
+scale = Vector2(1, 0.375)
+texture = ExtResource("2_5ii8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vent"]
+shape = SubResource("RectangleShape2D_sbbff")
 
 [node name="Breaker" parent="." instance=ExtResource("3_adfh8")]
 position = Vector2(352, 288)
 
-[node name="Electricity" parent="Breaker" instance=ExtResource("4_hu5s6")]
+[node name="Electricity" type="StaticBody2D" parent="Breaker" groups=["wall"]]
 position = Vector2(288, -56)
+scale = Vector2(1, 0.5)
+metadata/_edit_group_ = true
 
-[node name="Target" parent="." instance=ExtResource("4_pw3em")]
-position = Vector2(704, 128)
+[node name="Sprite2D" type="Sprite2D" parent="Breaker/Electricity"]
+texture = ExtResource("2_5ii8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breaker/Electricity"]
+shape = SubResource("RectangleShape2D_abqb2")
