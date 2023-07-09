@@ -15,7 +15,7 @@ func _process(delta):
 
 func disable_breaker():
 	$CollisionShape2D.disabled = true
-	$Sprite2D.texture = load("res://assets/img/breaker-emp-temp.png")
+	$AnimationPlayer.play("emp")
 	$BreakerTimer.start()
 	for child in electricity:
 		child.disable()
@@ -23,6 +23,6 @@ func disable_breaker():
 
 func _on_breaker_timer_timeout():
 	$CollisionShape2D.disabled = false
-	$Sprite2D.texture = load("res://assets/img/breaker-temp.png")
+	$AnimationPlayer.play("idle")
 	for child in electricity:
 		child.enable()

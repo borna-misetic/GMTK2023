@@ -6,9 +6,9 @@ var bullets_left = [3,3,3]
 
 const bullet_path = preload("res://scenes/bullet.tscn")
 # shouldn't preload here, but who cares (not me)
-const red_bullet = preload("res://assets/img/red-temp.png")
-const blue_bullet = preload("res://assets/img/blue-temp.png")
-const silver_bullet = preload("res://assets/img/silver-temp.png")
+const red_bullet = preload("res://assets/img/red-bullet.png")
+const blue_bullet = preload("res://assets/img/blue-bullet.png")
+const silver_bullet = preload("res://assets/img/silver-bullet.png")
 var is_fired = false
 var finished = true
 var active_bullet = ""
@@ -23,20 +23,24 @@ func _input(event):
 		$AnimationPlayer.play("shoot")
 		finished = false
 		await get_tree().create_timer(0.7).timeout
-		get_parent().add_child(bullet)
-		$Camera2D.enabled = false
-		bullet.connect("destroyed", Callable(self, "on_destroyed"))
 		match(active_bullet):
-			"red": 
+			"red":
+				bullet.particle_color = Color(0.67,0.2,0.2)
 				bullet.bullet_type = active_bullet
 				bullet.set_color(red_bullet)
-			"blue": 
+			"blue":
+				bullet.particle_color = Color(0.22,0.6,0.6)
 				bullet.bullet_type = active_bullet
 				bullet.set_color(blue_bullet)
-			"silver": 
+			"silver":
+				bullet.particle_color = Color(0.61,0.68,0.71)
 				bullet.bullet_type = active_bullet
 				bullet.set_color(silver_bullet)
 		bullets_left[active_index] -= 1
+		get_parent().add_child(bullet)
+		$Camera2D.enabled = false
+		bullet.connect("destroyed", Callable(self, "on_destroyed"))
+		bullet.connect("fail", Callable(self, "failed"))
 		match(active_index):
 			0: $SwapMenu/RedCount.text = str(bullets_left[active_index])
 			1: $SwapMenu/BlueCount.text = str(bullets_left[active_index])
@@ -68,3 +72,10 @@ func _on_blue_button_pressed():
 func _on_silver_button_pressed():
 	active_bullet = "silver"
 	active_index = 2
+
+
+func failed():
+	finished = false
+	$AnimationPlayer.play("fail")
+	await $AnimationPlayer.animation_finished
+	get_tree().reload_current_scene()

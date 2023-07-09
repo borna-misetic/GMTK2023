@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnplp2vg3t20g"]
+
+[ext_resource type="Texture2D" uid="uid://otmlqci5euoj" path="res://assets/img/test-dummy.png" id="1_oh7w4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phjow"]
+size = Vector2(128, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0186q"]
+size = Vector2(53, 111)
+
+[node name="Dummy" type="StaticBody2D" groups=["target"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oh7w4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(32, 21.5)
+shape = SubResource("RectangleShape2D_phjow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-58.5, -0.5)
+shape = SubResource("RectangleShape2D_0186q")

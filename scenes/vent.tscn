@@ -1,16 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckvufig4jyfnu"]
 
-[ext_resource type="Texture2D" uid="uid://iwvq2gt8uh32" path="res://assets/img/icon.svg" id="1_773x3"]
+[ext_resource type="Texture2D" uid="uid://n4afopgjby7d" path="res://assets/img/tiles.png" id="1_wqndm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ay1na"]
-size = Vector2(128, 48)
+size = Vector2(11, 30)
 
 [node name="Vent" type="StaticBody2D" groups=["vent"]]
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1, 0.375)
-texture = ExtResource("1_773x3")
+texture = ExtResource("1_wqndm")
+hframes = 4
+vframes = 4
+frame = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9.5, 0)
 shape = SubResource("RectangleShape2D_ay1na")

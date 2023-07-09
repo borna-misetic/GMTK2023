@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyilyr555kuok"]
+[gd_scene load_steps=8 format=3 uid="uid://cyilyr555kuok"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_k64x0"]
-[ext_resource type="Texture2D" uid="uid://bpa2inv6b6u2r" path="res://assets/img/red-temp.png" id="2_g3awl"]
+[ext_resource type="Texture2D" uid="uid://8km2wx313oh7" path="res://assets/img/blue-bullet.png" id="2_8qpr7"]
+[ext_resource type="AudioStream" uid="uid://cok5bq7s1hd5w" path="res://assets/sound/sfx/BulletHit.wav" id="3_3425i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0huls"]
 size = Vector2(56, 8)
@@ -12,11 +13,25 @@ radius = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6y42g"]
 size = Vector2(16, 16)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83msw"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 8.0
+scale_max = 8.0
+color = Color(1, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_k64x0")
+bullet_type = "blue"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_g3awl")
+texture = ExtResource("2_8qpr7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0huls")
@@ -36,6 +51,17 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 position = Vector2(24, 0)
 shape = SubResource("RectangleShape2D_6y42g")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_83msw")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.88
+
+[node name="Crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3425i")
 
 [connection signal="mouse_entered" from="MouseDeadzone" to="." method="_on_mouse_deadzone_mouse_entered"]
 [connection signal="mouse_exited" from="MouseDeadzone" to="." method="_on_mouse_deadzone_mouse_exited"]
